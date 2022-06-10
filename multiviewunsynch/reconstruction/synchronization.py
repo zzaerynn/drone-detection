@@ -68,7 +68,7 @@ def sync_iter(fps1, fps2, detect1, detect2, frame1, frame2, maxIter=200, thresho
             s2 = np.asarray(interpolate.splev(timestamp, spline2))
             ds = np.asarray(interpolate.splev(timestamp+d, spline2)) - s2
             M = solver(s1,s2,ds,d)
-            if len(M) is not 0:
+            if len(M) != 0:
                 if len(M.shape)==1:
                     M = np.expand_dims(M,axis=0)
                 for Mi in M:

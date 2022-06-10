@@ -16,13 +16,14 @@ def estimate_M(data,param=None):
     M = transformation.affine_matrix_from_points(reconst,gt,shear=False,scale=True)
     
     return M.ravel()
+    #ravel : flattening 해주는 역할 
 
 
 def error_M(model,data,param=None):
     reconst = data[:3]
     gt = data[3:]
     M = model.reshape(4,4)
-
+    #
     tran = np.dot(M,util.homogeneous(reconst))
     tran /= tran[-1]
     

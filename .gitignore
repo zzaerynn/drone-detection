@@ -125,3 +125,6 @@ dmypy.json
 
 # Datas
 data/
+
+#dataset from github
+./drone-tracking-datasets

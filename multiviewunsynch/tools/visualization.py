@@ -270,7 +270,7 @@ def error_traj(traj,error,thres=0.5,title=None,colormap='Wistia',size=100, text=
     sc = ax.scatter3D(traj[0],traj[1],traj[2],c=error*100,marker='o',s=size)
 
     # Plot the timestamp of points that have large errors
-    if text is not None:
+    if text != None:
         assert len(text)==len(error), 'Wrong number of timestamps'
         text = text.astype(int)
         for i in range(len(text)):
