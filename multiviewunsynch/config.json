@@ -52,6 +52,6 @@
     "thres_triangulation": 20,
     "smooth_factor": [10, 20],
     "sampling_rate": 0.5,
-    "path_output": "../drone-tracking-datasets/dataset4/result.pkl"
+    "path_output": "./result_dataset4.pkl"
   }
 }

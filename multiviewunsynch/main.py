@@ -9,6 +9,7 @@ from datetime import datetime
 from reconstruction import common
 from analysis.compare_gt import align_gt
 import sys
+import cv2
 
 if len(sys.argv) < 2:
     print( "Please provide a path to a proper config file")
@@ -83,8 +84,44 @@ while True:
     flight.traj_len = []
 
 flight.spline_to_traj(sampling_rate=1)
+
+#kalman filter applying
+kf = cv2.KalmanFilter(dynamParams = 3, measureParams=3)
+#B
+kf.controlMatrix = np.array([[1,0,0], [0,1,0], [0,0,1]], np.float32)
+#H
+kf.measurementMatrix = np.array([[1,0,0], [0,1,0], [0,0,1]], np.float32) 
+#R
+kf.measurementNoiseCov = np.array([[1,0,0], [0,1,0], [0,0,1]], np.float32)  * 2.5
+#Q
+kf.processNoiseCov = np.array([[1,0,0], [0,1,0], [0,0,1]], np.float32) *0.1
+#A
+kf.transitionMatrix = np.array([[1,0,0], [0,1,0], [0,0,1]], np.float32) 
+# 
+def predict(x, y, z):
+    measured = np.array([[np.float32(x)], [np.float32(y)], [np.float32(z)]])
+    kf.correct(measured)
+    predicted = kf.predict()
+    x,y,z = predicted[0],predicted[1], predicted[2]
+    return x,y,z
+
+trajectory = flight.traj
+x,y,z = trajectory[1], trajectory[2], trajectory[3]
+
+for i in range(len(flight.traj[1])):
+    predx,predy,predz = predict(x[i],y[i],z[i])
+    x = np.append(x, predx)
+    y = np.append(y, predy)
+    z = np.append(z, predz)
+
+traj = np.array([x,y,z], np.float32)
+# flight.traj[1:] = np.array([x,y,z], np.float32)
+
+# flight.traj = np.array([flight.traj[0],x,y,z], np.float32)
+
+
 # Visualize the 3D trajectory
-vis.show_trajectory_3D(flight.traj[1:],line=False)
+vis.show_trajectory_3D(traj,line=False)
 flight.out  = {'reconst_tran' : flight.traj[1:]}
 # Align with the ground truth data if available
 if flight.gt:
