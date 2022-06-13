@@ -150,6 +150,8 @@ def show_trajectory_3D(*X,title=None,color=True,line=False):
             ax.plot(X[i][0],X[i][1],X[i][2])
         plt.xlabel('X')
         plt.ylabel('Y')
+        # plt.xlim([-1.5, 1.5])
+        # plt.ylim([-0.6, 1.0])
     if title:
         plt.suptitle(title)
     # plt.axis('off')

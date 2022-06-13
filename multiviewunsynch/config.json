@@ -1,15 +1,11 @@
 {
-  "comments": [
-    "This is the templete for configure a dataset for the pipeline.",
-
-    "Further instruction goes here..."
-  ],
+  "comments": ["betas: Sony G: 3516", " Mate 10: 0 "],
 
   "necessary inputs": {
     "path_detections": [
-      "../drone-tracking-datasets/dataset4/detections/cam0.txt",
       "../drone-tracking-datasets/dataset4/detections/cam2.txt",
       "../drone-tracking-datasets/dataset4/detections/cam3.txt",
+      "../drone-tracking-datasets/dataset4/detections/cam0.txt",
       "../drone-tracking-datasets/dataset4/detections/cam1.txt",
       "../drone-tracking-datasets/dataset4/detections/cam4.txt",
       "../drone-tracking-datasets/dataset4/detections/cam5.txt",
@@ -17,9 +13,9 @@
     ],
 
     "path_cameras": [
-      "../drone-tracking-datasets/calibration/gopro3/gopro3.json",
       "../drone-tracking-datasets/calibration/mate7/mate7.json",
       "../drone-tracking-datasets/calibration/mate10/mate10_2.json",
+      "../drone-tracking-datasets/calibration/gopro3/gopro3.json",
       "../drone-tracking-datasets/calibration/p20pro/p20pro.json",
       "../drone-tracking-datasets/calibration/sony5100/sony5100.json",
       "../drone-tracking-datasets/calibration/sonyG/sonyG_2.json",
@@ -56,6 +52,6 @@
     "thres_triangulation": 20,
     "smooth_factor": [10, 20],
     "sampling_rate": 0.5,
-    "path_output": "result_dataset4.pkl"
+    "path_output": "../drone-tracking-datasets/dataset4/result.pkl"
   }
 }
